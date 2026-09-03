@@ -1,0 +1,295 @@
+/*
+ * WarpHold site — the Kinetic design system from the product UI
+ * (warphold-ui: src/design/tokens.css + fonts.css), reduced to plain CSS.
+ * No framework, no build step, no third-party request.
+ */
+
+/* Self-hosted OFL fonts — see assets/fonts/OFL-*.txt. */
+@font-face {
+  font-family: Unbounded;
+  src: url("assets/fonts/Unbounded-Variable.woff2") format("woff2-variations");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("assets/fonts/SpaceGrotesk-Variable.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("assets/fonts/SpaceMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ground: #16181d;
+  --panel: #1d2027;
+  --line: #2a2e36;
+  --line-strong: #3a3f49;
+  --ink: #f2f3f5;
+  --ink-soft: #c7cbd4;
+  --muted: #9aa0ad;
+  --dim: #6d7381;
+  --ember: #ff6a1a;
+  --ember-soft: #ff8a4c;
+  --ember-hover: #ffb089;
+  --good: #2fbf83;
+  --bad: #ff5d5d;
+  --font-display: "Unbounded", "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --radius: 4px;
+  --shell: 1080px;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--ember-soft); text-decoration: none; }
+a:hover { color: var(--ember-hover); }
+/* Links inside prose are underlined, so colour is never the only cue. */
+p a, li a, figcaption a { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+
+img, svg { max-width: 100%; }
+img { height: auto; display: block; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ember);
+  color: var(--ground);
+  padding: 10px 16px;
+  font-weight: 600;
+  z-index: 10;
+}
+.skip:focus { left: 0; }
+
+.shell { max-width: var(--shell); margin: 0 auto; padding: 0 24px; }
+
+/* ---- header ---- */
+
+.top {
+  border-bottom: 1px solid var(--line);
+  background: var(--ground);
+}
+.top .shell {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.brand:hover { color: var(--ink); text-decoration: none; }
+.brand img { width: 26px; height: 26px; }
+.brand span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+.tabs { display: flex; gap: 22px; }
+.tabs a {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.tabs a:hover { color: var(--ink); text-decoration: none; }
+.tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ember); }
+.top .repo { margin-left: auto; font-size: 13px; }
+
+/* ---- hero ---- */
+
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero::before {
+  content: "";
+  position: absolute;
+  left: -18%;
+  top: 0;
+  width: 52%;
+  height: 100%;
+  background: var(--panel);
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+.hero .shell { position: relative; padding-top: 72px; padding-bottom: 64px; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(38px, 8vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 12px 0 0;
+}
+.hero h1 .slash { color: var(--ember); }
+.hero p.lede {
+  font-size: clamp(17px, 2.4vw, 21px);
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 20px 0 0;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---- sections ---- */
+
+main section { border-bottom: 1px solid var(--line); }
+main section .shell { padding-top: 56px; padding-bottom: 56px; }
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 10px 0 0;
+}
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0 0 6px;
+}
+p { max-width: 68ch; }
+section p:first-of-type { margin-top: 14px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ember);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.card p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+ul.plain { list-style: none; padding: 0; margin: 20px 0 0; max-width: 68ch; }
+ul.plain li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+ul.plain li:last-child { border-bottom: 0; }
+ul.plain li b { font-weight: 600; }
+ul.plain li .n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ember);
+  flex: 0 0 22px;
+}
+
+/* ---- figures ---- */
+
+figure { margin: 28px 0 0; }
+figure img {
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+figcaption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+figure.phone { max-width: 300px; }
+
+/* ---- install block ---- */
+
+.install {
+  margin-top: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+.install .bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.install .bar .eyebrow { flex: 1 1 auto; max-width: none; }
+.install .bar button.copy { margin-left: auto; }
+.install pre {
+  margin: 0;
+  padding: 16px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.install pre::before { content: "$ "; color: var(--ember); }
+button.copy {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+button.copy:hover { border-color: var(--ember); color: var(--ink); }
+.note { color: var(--muted); font-size: 14px; margin-top: 12px; }
+
+/* ---- footer ---- */
+
+footer .shell { padding-top: 40px; padding-bottom: 56px; }
+footer p { color: var(--muted); font-size: 14px; margin: 0 0 10px; max-width: 72ch; }
+footer nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; margin-bottom: 14px; }
+
+@media (max-width: 480px) {
+  .top .shell { gap: 16px; }
+  .top .repo { margin-left: 0; }
+  .hero .shell { padding-top: 48px; padding-bottom: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

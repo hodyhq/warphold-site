@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'">
+<title>WarpHold — backups that hold</title>
+<meta name="description" content="WarpHold backs up one Linux machine to storage you control: encrypted before it leaves, deduplicated, and restorable with a stock Kopia binary.">
+<link rel="icon" href="assets/warphold.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/Unbounded-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="./"><img src="assets/warphold.svg" alt="" width="26" height="26"><span>WARPHOLD</span></a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="./" aria-current="page">Home</a>
+      <a href="fleet.html">Fleet</a>
+    </nav>
+    <a class="repo" href="https://github.com/hodyhq/warphold">Source on GitHub</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="shell">
+    <p class="eyebrow">One machine · Linux</p>
+    <h1>Backups that<br><span class="slash">hold</span></h1>
+    <p class="lede">WarpHold backs up the files on this computer to storage you control — encrypted before they leave, and restorable years later with nothing but a stock Kopia binary.</p>
+  </div>
+</section>
+
+<section id="install">
+  <div class="shell">
+    <p class="eyebrow">Install</p>
+    <h2>One command</h2>
+    <p>Installs the binary, a user-scope engine service and the tray, then opens the app on this machine. Nothing is sent anywhere until you point it at a repository.</p>
+    <div class="install">
+      <div class="bar">
+        <p class="eyebrow">Linux · amd64 / arm64</p>
+        <button class="copy" type="button" aria-controls="cmd-app">Copy</button>
+      </div>
+      <pre id="cmd-app">curl -fsSL https://get.warphold.com/app.sh | sh</pre>
+    </div>
+    <p class="note">Prefer a package? <code>.deb</code> and <code>.rpm</code> builds, with signed checksums, are on the
+      <a href="https://github.com/hodyhq/warphold/releases">GitHub Releases page</a>. Read
+      <a href="https://get.warphold.com/app.sh">the script</a> before you pipe it — it is a release asset in the same repository as the binary.</p>
+  </div>
+</section>
+
+<section id="snapshots">
+  <div class="shell">
+    <p class="eyebrow">Snapshots</p>
+    <h2>Every source, and when it last ran</h2>
+    <p>The front page lists each directory this machine backs up, its last snapshot, its size and whether the last run succeeded. A source is a path plus a policy; you add one by pointing at a directory.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-snapshots@412.png" width="412" height="915">
+        <img src="assets/screenshots/solo-snapshots@1440.png" width="1440" height="900"
+             alt="The WarpHold app listing four backup sources with their last snapshot time, size and status.">
+      </picture>
+      <figcaption>Snapshots — every source this computer backs up.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="history">
+  <div class="shell">
+    <p class="eyebrow">History and browse</p>
+    <h2>Open any snapshot and look inside</h2>
+    <p>Each source keeps its full history: every run, its size, how long it took and what changed. Open a snapshot and you browse it like a directory — no restore needed to see what was in it.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-history@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/solo-history@1440.png" width="1440" height="900"
+             alt="Snapshot history for one source, showing each run with its time, size and duration.">
+      </picture>
+      <figcaption>History — every run of one source.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-browse@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/solo-browse@1440.png" width="1440" height="900"
+             alt="Browsing the files and directories inside a single snapshot.">
+      </picture>
+      <figcaption>Browse — the contents of one snapshot.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="restore">
+  <div class="shell">
+    <p class="eyebrow">Restore</p>
+    <h2>To a directory, an archive, or a mount</h2>
+    <p>Restore a whole snapshot or a single file. Write it back where it came from, into a different directory, out to a <code>.tar</code> or <code>.zip</code>, or mount the snapshot read-only and copy what you need.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-restore@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/solo-restore@1440.png" width="1440" height="900"
+             alt="The restore screen offering a target directory, an archive file, or a read-only mount.">
+      </picture>
+      <figcaption>Restore — pick a destination and go.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="policies">
+  <div class="shell">
+    <p class="eyebrow">Policies</p>
+    <h2>What you keep, how often, and what you leave out</h2>
+    <p>A policy sets the schedule, the retention counts — hourly, daily, weekly, monthly, annual — the exclusion rules, and the compression and upload limits. Policies apply per source, per directory or globally, and each screen shows which level a value came from.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-policies@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/solo-policies@1440.png" width="1440" height="900"
+             alt="The policy screen with schedule, retention counts and exclusion rules.">
+      </picture>
+      <figcaption>Policies — schedules, retention and exclusions.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="engine">
+  <div class="shell">
+    <p class="eyebrow">Tasks and repository</p>
+    <h2>You can see what the engine is doing</h2>
+    <p>Tasks lists every run the engine has started, finished or failed, with its log. The repository screen shows where your data goes, what it is protected by, and how much of it is stored.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-tasks@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/solo-tasks@1440.png" width="1440" height="900"
+             alt="The tasks list showing recent engine runs with status and duration.">
+      </picture>
+      <figcaption>Tasks — what the engine has been doing.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/solo-repository@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/solo-repository@1440.png" width="1440" height="900"
+             alt="The repository screen showing the connected storage, its encryption and its stored size.">
+      </picture>
+      <figcaption>Repository — the storage this machine is connected to.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="tray">
+  <div class="shell">
+    <p class="eyebrow">Tray</p>
+    <h2>Out of the way until it isn't</h2>
+    <p>The tray icon carries the state of the last run: green when the last snapshot succeeded, amber when it is overdue, red when it failed. Click it for the last run, the next scheduled one, a <b>Back up now</b> item, and <b>Details</b>, which opens the app. It starts with your session and needs no root.</p>
+  </div>
+</section>
+
+<section id="protection">
+  <div class="shell">
+    <p class="eyebrow">How it protects you</p>
+    <h2>Four things, and no surprises</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>The engine runs here</h3>
+        <p>Reading, hashing, packing and encryption all happen on this machine. There is no service in the middle that could read your files, because there is no service in the middle.</p>
+      </div>
+      <div class="card">
+        <h3>Encrypted before it leaves</h3>
+        <p>Every content block and every piece of metadata is encrypted locally with your repository password. Storage sees opaque blobs with random names.</p>
+      </div>
+      <div class="card">
+        <h3>Deduplicated and incremental</h3>
+        <p>Content-addressed blocks mean a file that has not changed is not uploaded again, and identical content anywhere in the source is stored once.</p>
+      </div>
+      <div class="card">
+        <h3>Restore without WarpHold</h3>
+        <p>The repository format is Kopia's. Given the location, the password and a stock <code>kopia</code> binary you can list and restore every snapshot — no WarpHold, no account, no network service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fleet-pointer">
+  <div class="shell">
+    <p class="eyebrow">More than one machine?</p>
+    <h2>Fleet backs up a household from one screen</h2>
+    <p>Fleet is a small server you run yourself. Devices enroll with one command, each into its own isolated repository, and one dashboard shows whether every one of them is protected right now. <a href="fleet.html">See the Fleet tab</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <nav aria-label="Footer">
+      <a href="https://github.com/hodyhq/warphold">GitHub</a>
+      <a href="https://docs.warphold.com">Docs</a>
+      <a href="https://github.com/hodyhq/warphold/releases">Releases</a>
+    </nav>
+    <p>Built on the Kopia engine — Apache 2.0. WarpHold is a fork of <a href="https://github.com/kopia/kopia">kopia/kopia</a>; see our
+      <a href="https://github.com/hodyhq/warphold/blob/main/NOTICE">NOTICE</a> and
+      <a href="https://github.com/hodyhq/warphold/blob/main/LICENSE">LICENSE</a>.</p>
+    <p>This site has no analytics, no cookies and no third-party requests.</p>
+    <p>© WarpHold</p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

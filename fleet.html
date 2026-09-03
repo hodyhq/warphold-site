@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'">
+<title>WarpHold Fleet — every machine, one screen</title>
+<meta name="description" content="WarpHold Fleet is a server you run yourself: devices enroll with one command into their own isolated repository, and one dashboard shows whether every one of them is protected.">
+<link rel="icon" href="assets/warphold.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/Unbounded-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="./"><img src="assets/warphold.svg" alt="" width="26" height="26"><span>WARPHOLD</span></a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="./">Home</a>
+      <a href="fleet.html" aria-current="page">Fleet</a>
+    </nav>
+    <a class="repo" href="https://github.com/hodyhq/warphold">Source on GitHub</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="shell">
+    <p class="eyebrow">Many machines · One server you run</p>
+    <h1>Every machine<span class="slash">,</span><br>one screen</h1>
+    <p class="lede">Fleet is a server you install yourself. Devices enroll with one command, each into its own isolated repository, and the dashboard answers the only question that matters: is everything protected right now?</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-overview@412.png" width="412" height="915">
+        <img src="assets/screenshots/fleet-overview@1440.png" width="1440" height="900"
+             alt="The Fleet dashboard: how many devices are protected, the last 24 hours of snapshots, and a 30-day strip per device.">
+      </picture>
+      <figcaption>Overview — health counts, the last 24 hours, and a 30-day strip per device.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="install">
+  <div class="shell">
+    <p class="eyebrow">Install</p>
+    <h2>One command, then five steps in the browser</h2>
+    <p>Run this on the machine that will be the Fleet server — a small VM or a spare box is plenty. It verifies the signed checksum, creates the service user and directories, writes a systemd unit, starts the server, and prints the URL and a one-time setup token.</p>
+    <div class="install">
+      <div class="bar">
+        <p class="eyebrow">Linux · amd64 / arm64</p>
+        <button class="copy" type="button" aria-controls="cmd-fleet">Copy</button>
+      </div>
+      <pre id="cmd-fleet">curl -fsSL https://get.warphold.com/fleet.sh | sh</pre>
+    </div>
+    <p class="note">The server binds to the LAN and expects a reverse proxy in front of it; the script prints what the proxy has to pass through. Read
+      <a href="https://get.warphold.com/fleet.sh">the script</a> first — it is a release asset in the
+      <a href="https://github.com/hodyhq/warphold/releases">same repository as the binary</a>.</p>
+
+    <ul class="plain">
+      <li><span class="n">1</span><span><b>Open the printed URL</b> and paste the setup token. You choose the sealing passphrase here; it encrypts every secret the server stores. Write it down — nobody can reset it for you.</span></li>
+      <li><span class="n">2</span><span><b>Create the first admin account.</b></span></li>
+      <li><span class="n">3</span><span><b>Confirm the public URL.</b> The server fetches its own status through it before the step passes, so enrollment can only start once devices can actually reach it.</span></li>
+      <li><span class="n">4</span><span><b>Choose where the backups live</b> — the Fleet server's own disk, with an optional offsite mirror, or straight through to a cloud bucket.</span></li>
+      <li><span class="n">5</span><span><b>Copy the enrollment command</b> for your first group and run it on a device.</span></li>
+    </ul>
+
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-activate-1@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-activate-1@1440.png" width="1440" height="900"
+             alt="Activation step one: entering the setup token and choosing the sealing passphrase.">
+      </picture>
+      <figcaption>Step 1 — setup token and sealing passphrase.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-activate-2@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-activate-2@1440.png" width="1440" height="900"
+             alt="Activation step two: creating the first admin account.">
+      </picture>
+      <figcaption>Step 2 — the first admin.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-activate-3@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-activate-3@1440.png" width="1440" height="900"
+             alt="Activation step three: choosing where the backups will be stored.">
+      </picture>
+      <figcaption>Step 4 — where the backups live.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-activate-4@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-activate-4@1440.png" width="1440" height="900"
+             alt="Activation step four: the fleet is running, with the first enrollment command.">
+      </picture>
+      <figcaption>Step 5 — the fleet is on, with the first enrollment command.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="enroll">
+  <div class="shell">
+    <p class="eyebrow">Enrollment</p>
+    <h2>A device joins with one command</h2>
+    <p>Each group issues a one-shot token and shows the command to run on the new machine. The device gets its own repository, its own repository password and its own storage key, and picks up the group's policy template and storage target on the way in. Revoke a device and its key stops working immediately; its backups stay for the retention window you set.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-groups-add-device@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-groups-add-device@1440.png" width="1440" height="900"
+             alt="The add-device panel showing a one-shot enrollment token and the command to run on the new machine.">
+      </picture>
+      <figcaption>Add device — a one-shot token and the command to run.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="devices">
+  <div class="shell">
+    <p class="eyebrow">Devices</p>
+    <h2>Every machine, its group and its last good backup</h2>
+    <p>The device list is the roll call: group, health, last successful snapshot, size. Open one and you get its sources, its recent runs, its 30-day strip, and the commands an admin can send it — back up now, verify, or run a test restore.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-devices@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-devices@1440.png" width="1440" height="900"
+             alt="The devices list with each enrolled machine, its group, health and last good backup.">
+      </picture>
+      <figcaption>Devices — everything enrolled, at a glance.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-device@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-device@1440.png" width="1440" height="900"
+             alt="One device page with its sources, recent runs and the commands an admin can send it.">
+      </picture>
+      <figcaption>Device — sources, runs and admin commands.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-device-failing@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-device-failing@1440.png" width="1440" height="900"
+             alt="A device whose last backup failed, showing the exact error the agent reported.">
+      </picture>
+      <figcaption>A failure shows the error the device actually reported — not a red dot.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="groups">
+  <div class="shell">
+    <p class="eyebrow">Groups, policies and targets</p>
+    <h2>Set it once for a group, not once per machine</h2>
+    <p>A group ties a policy template to a storage target. A policy template says what to back up, how often and how long to keep it. A target says where it goes. Change the template and every device in the group follows on its next poll.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-groups@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-groups@1440.png" width="1440" height="900"
+             alt="The groups screen, each group tying a policy template to a storage target.">
+      </picture>
+      <figcaption>Groups — a policy template plus a storage target.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-templates@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-templates@1440.png" width="1440" height="900"
+             alt="Policy templates listing what to back up, how often, and how long to keep it.">
+      </picture>
+      <figcaption>Policies — what, how often, how long.</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-targets@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-targets@1440.png" width="1440" height="900"
+             alt="Storage targets with their kind, their local status and their offsite status.">
+      </picture>
+      <figcaption>Targets — where the groups back up to, and whether the offsite copy is healthy.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="isolation">
+  <div class="shell">
+    <p class="eyebrow">Isolation and security</p>
+    <h2>One device cannot reach another device's backups</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>A repository per device</h3>
+        <p>Every device gets its own Kopia repository with its own random password. No key, no repository and no content index is shared between devices, so a compromised laptop exposes exactly one machine's data.</p>
+      </div>
+      <div class="card">
+        <h3>Append-only gateway</h3>
+        <p>Devices write through the Fleet server's S3-compatible gateway with a key scoped to their own prefix. The gateway allows only the writes a backup actually needs; a device cannot delete or overwrite its own history, let alone anyone else's.</p>
+      </div>
+      <div class="card">
+        <h3>Object Lock offsite</h3>
+        <p>The offsite copy is written under Object Lock, and Fleet verifies the bucket is really configured for it before it calls a target healthy. Nothing WarpHold runs can delete a locked object before its retention expires.</p>
+      </div>
+      <div class="card">
+        <h3>Sealing passphrase</h3>
+        <p>Every secret the server stores — repository passwords, storage keys, the SMTP password — is sealed with a key derived from a passphrase you set at activation and can rotate later. The server cannot recover it and neither can we.</p>
+      </div>
+      <div class="card">
+        <h3>Devices hold no cloud credentials</h3>
+        <p>In both storage modes the cloud keys stay on the Fleet server. A device only ever holds a gateway key scoped to its own prefix, which you can revoke in one click.</p>
+      </div>
+      <div class="card">
+        <h3>A recovery kit per device</h3>
+        <p>One printable page per device: where its repository is, its password, read-only credentials, and the literal commands to restore with a stock <code>kopia</code> binary. Fleet is never required for a restore — a test in CI fails the build if it ever becomes required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="storage">
+  <div class="shell">
+    <p class="eyebrow">Storage</p>
+    <h2>Your disk, the cloud, or both</h2>
+    <ul class="plain">
+      <li><span class="n">A</span><span><b>Fleet disk.</b> Devices back up to the Fleet server's own storage. Fast on a LAN, no cloud bill, and the data stays in the building.</span></li>
+      <li><span class="n">B</span><span><b>Fleet disk plus an offsite mirror.</b> A scheduled job copies each device's blobs to a B2 bucket under Object Lock. The mirror only ever gains objects, so it survives anything that happens to the server.</span></li>
+      <li><span class="n">C</span><span><b>Cloud-direct.</b> The gateway writes straight through to an S3-compatible bucket with the fleet's own key. No local copy to size, and still no cloud credentials on any device.</span></li>
+    </ul>
+    <p class="note">The targets screen shows local and offsite health separately, so "the backup ran" and "the offsite copy is current" are two different green ticks.</p>
+  </div>
+</section>
+
+<section id="settings">
+  <div class="shell">
+    <p class="eyebrow">Settings and reporting</p>
+    <h2>The parts you set once</h2>
+    <p>Fleet name, public URL, poll interval, admin accounts, SMTP, and the schedules for the background jobs: verify, test restore, maintenance, and the mirror. A weekly digest emails you per-device health, fleet totals, any un-acknowledged recovery kit, and any job that has been failing for more than a week.</p>
+    <figure>
+      <picture>
+        <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-settings@412.png" width="412" height="915">
+        <img loading="lazy" src="assets/screenshots/fleet-settings@1440.png" width="1440" height="900"
+             alt="Fleet settings: fleet name, poll interval and the admin accounts.">
+      </picture>
+      <figcaption>Settings — name, poll interval and admins.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="phones">
+  <div class="shell">
+    <p class="eyebrow">On a phone</p>
+    <h2>The same dashboard, in your hand</h2>
+    <p>Every screen is built for a 412&nbsp;px viewport, not shrunk into one. Checking whether the house is protected from a phone takes one tap.</p>
+    <figure class="phone">
+      <img loading="lazy" src="assets/screenshots/fleet-devices@412.png" width="412" height="915"
+           alt="The devices list on a phone-sized screen, one device per row with health and last backup.">
+      <figcaption>Devices at 412&nbsp;px.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="scale">
+  <div class="shell">
+    <p class="eyebrow">Scale</p>
+    <h2>Built for a thousand devices</h2>
+    <p>The gateway is stateless: no process, no connection and no session per device — one signature check, one key lookup from an in-memory cache, one storage operation. A thousand devices taking hourly snapshots is roughly 55 writes a second fleet-wide, and each device gets its own rate limit so a runaway machine slows itself down instead of the fleet. It is designed to run on hardware you already own.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <nav aria-label="Footer">
+      <a href="https://github.com/hodyhq/warphold">GitHub</a>
+      <a href="https://docs.warphold.com">Docs</a>
+      <a href="https://github.com/hodyhq/warphold/releases">Releases</a>
+    </nav>
+    <p>Built on the Kopia engine — Apache 2.0. WarpHold is a fork of <a href="https://github.com/kopia/kopia">kopia/kopia</a>; see our
+      <a href="https://github.com/hodyhq/warphold/blob/main/NOTICE">NOTICE</a> and
+      <a href="https://github.com/hodyhq/warphold/blob/main/LICENSE">LICENSE</a>.</p>
+    <p>This site has no analytics, no cookies and no third-party requests.</p>
+    <p>© WarpHold</p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
