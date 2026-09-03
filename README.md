@@ -62,6 +62,14 @@ Both sizes always travel together: `<picture>` serves the 412 px capture below a
 `width`/`height` attributes on each `<source>` and `<img>` must match the files, or the pages reflow while
 loading. If a screen is renamed upstream, update the `<picture>` blocks and the `alt` text with it.
 
+## Before publishing
+
+- [ ] TODO: regenerate two stale screenshot captures — `fleet-targets` (says "Sync to B2 is a later feature";
+  that feature is now built) and `solo-repository` (the Fleet-server card has moved to Settings). Waits on the
+  screenshot pipeline; see "Updating the screenshots" above.
+- [ ] Re-verify every feature sentence in `fleet.html` against the merged code before Task 37 flips the repo
+  public.
+
 ## Licence
 
 Apache-2.0, the same as the product — see `LICENSE`. The bundled fonts are under the SIL Open Font Licence;

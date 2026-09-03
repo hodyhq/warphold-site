@@ -122,7 +122,7 @@
   <div class="shell">
     <p class="eyebrow">Devices</p>
     <h2>Every machine, its group and its last good backup</h2>
-    <p>The device list is the roll call: group, health, last successful snapshot, size. Open one and you get its sources, its recent runs, its 30-day strip, and the commands an admin can send it — back up now, verify, or run a test restore.</p>
+    <p>The device list is the roll call: group, health, last successful snapshot, size. Open one and you get its sources, its recent runs, its 30-day strip, and the commands an admin can send it — back up now, verify, pause, or resume.</p>
     <figure>
       <picture>
         <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-devices@412.png" width="412" height="915">
@@ -232,7 +232,7 @@
   <div class="shell">
     <p class="eyebrow">Settings and reporting</p>
     <h2>The parts you set once</h2>
-    <p>Fleet name, public URL, poll interval, admin accounts, SMTP, and the schedules for the background jobs: verify, test restore, maintenance, and the mirror. A weekly digest emails you per-device health, fleet totals, any un-acknowledged recovery kit, and any job that has been failing for more than a week.</p>
+    <p>Fleet name, public URL, poll interval, admin accounts, SMTP, and the schedules for the background jobs — verify, test restore, maintenance and the mirror — which the Fleet server runs on its own schedule, with the intervals editable here. Test restore restores a sample of a device's latest snapshot on the Fleet server from the hosted repository, to prove recoverability. A weekly digest emails per-device health, offsite status and job results.</p>
     <figure>
       <picture>
         <source media="(max-width: 640px)" srcset="assets/screenshots/fleet-settings@412.png" width="412" height="915">
@@ -271,7 +271,7 @@
   <div class="shell">
     <nav aria-label="Footer">
       <a href="https://github.com/hodyhq/warphold">GitHub</a>
-      <a href="https://docs.warphold.com">Docs</a>
+      <a href="https://github.com/hodyhq/warphold#readme">Docs</a>
       <a href="https://github.com/hodyhq/warphold/releases">Releases</a>
     </nav>
     <p>Built on the Kopia engine — Apache 2.0. WarpHold is a fork of <a href="https://github.com/kopia/kopia">kopia/kopia</a>; see our
