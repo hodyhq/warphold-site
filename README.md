@@ -64,9 +64,9 @@ loading. If a screen is renamed upstream, update the `<picture>` blocks and the 
 
 ## Before publishing
 
-- [ ] TODO: regenerate two stale screenshot captures — `fleet-targets` (says "Sync to B2 is a later feature";
-  that feature is now built) and `solo-repository` (the Fleet-server card has moved to Settings). Waits on the
-  screenshot pipeline; see "Updating the screenshots" above.
+- [x] ~~TODO: regenerate two stale screenshot captures — `fleet-targets` (says "Sync to B2 is a later feature";
+  that feature is now built) and `solo-repository` (the Fleet-server card has moved to Settings).~~ Done: all
+  screenshots refreshed from UI main (v0.3, 5-step activation wizard).
 - [ ] Re-verify every feature sentence in `fleet.html` against the merged code before Task 37 flips the repo
   public.
 
